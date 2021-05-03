@@ -1,0 +1,14 @@
+---
+- name: Understand how to grab running services
+  hosts: localhost  # writing a playbook that will run agains any linux hosts
+  connection: local # important when connection is to localhost
+  gather_facts: yes # this runs setup.py against remote machines
+
+  tasks:
+   - name: Populate service facts
+     ansible.builtin.service_facts:
+     become: yes
+
+   - name: Print service facts
+     ansible.builtin.debug:
+        var: ansible_facts.services
